@@ -1,9 +1,18 @@
+// ========================
+// GLOBAL STORAGE
+// ========================
+
 let records = JSON.parse(localStorage.getItem("records")) || [];
+
+// ========================
+// DOM LOADED
+// ========================
 
 document.addEventListener("DOMContentLoaded", function () {
 
     const form = document.getElementById("expenseForm");
 
+    // Add Record
     if (form) {
         form.addEventListener("submit", function (e) {
             e.preventDefault();
@@ -21,12 +30,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
             form.reset();
             alert("Record Added Successfully!");
+
+            loadDashboard();
+            loadReports();
+            loadChart();
         });
     }
 
     loadDashboard();
     loadReports();
+    loadChart();
 });
+
+// ========================
+// DASHBOARD
+// ========================
 
 function loadDashboard() {
 
@@ -50,6 +68,10 @@ function loadDashboard() {
     if (netBalance) netBalance.textContent = "₹ " + (income - expense);
 }
 
+// ========================
+// REPORTS WITH SORTING
+// ========================
+
 function loadReports() {
 
     const table = document.getElementById("expenseTable");
@@ -57,57 +79,32 @@ function loadReports() {
 
     table.innerHTML = "";
 
+    // Copy + sort without changing original array
+    const sortedRecords = [...records]
+        .map((record, index) => ({ ...record, originalIndex: index }))
+        .sort((a, b) => new Date(b.date) - new Date(a.date));
+
     const grouped = {};
 
-    records.forEach((record, index) => {
+    sortedRecords.forEach(record => {
 
-        const month = new Date(record.date)
+        const monthKey = new Date(record.date)
             .toLocaleString('default', { month: 'long', year: 'numeric' });
 
-        if (!grouped[month]) {
-            grouped[month] = [];
+        if (!grouped[monthKey]) {
+            grouped[monthKey] = [];
         }
 
-        grouped[month].push({ ...record, index });
+        grouped[monthKey].push(record);
     });
 
     for (let month in grouped) {
 
         const monthRow = document.createElement("tr");
         monthRow.innerHTML = `
-            <td colspan="7" style="font-weight:bold; background:#e2e8f0;">
+            <td colspan="7" style="text-align:center; font-weight:bold; background:#e2e8f0;">
                 ${month}
             </td>`;
-        table.appendChild(monthRow);
-
-        grouped[month].forEach(item => {
-
-            const row = document.createElement("tr");
-
-            row.innerHTML = `
-                <td>${item.type}</td>
-                <td class="${item.type === 'income' ? 'income' : 'expense'}">
-                    ₹ ${item.amount}
-                </td>
-                <td>${item.category}</td>
-                <td>${item.date}</td>
-                <td>${item.description}</td>
-                <td>
-                    <button onclick="editRecord(${item.index})">Edit</button>
-                </td>
-                <td>
-                    <button onclick="deleteRecord(${item.index})">Delete</button>
-                </td>
-            `;
-
-            table.appendChild(row);
-        });
-    }
-}
-    for (let month in grouped) {
-
-        const monthRow = document.createElement("tr");
-        monthRow.innerHTML = `<td colspan="5" style="font-weight:bold; background:#e2e8f0;">${month}</td>`;
         table.appendChild(monthRow);
 
         grouped[month].forEach(record => {
@@ -122,22 +119,19 @@ function loadReports() {
                 <td>${record.category}</td>
                 <td>${record.date}</td>
                 <td>${record.description}</td>
+                <td><button onclick="editRecord(${record.originalIndex})">Edit</button></td>
+                <td><button onclick="deleteRecord(${record.originalIndex})">Delete</button></td>
             `;
 
             table.appendChild(row);
         });
     }
 }
-function resetData() {
 
-    const confirmReset = confirm("Are you sure you want to delete all records? This action cannot be undone.");
+// ========================
+// DELETE RECORD
+// ========================
 
-    if (confirmReset) {
-        localStorage.removeItem("records");
-        records = [];
-        location.reload();
-    }
-}
 function deleteRecord(index) {
 
     const confirmDelete = confirm("Delete this record?");
@@ -147,8 +141,14 @@ function deleteRecord(index) {
         localStorage.setItem("records", JSON.stringify(records));
         loadDashboard();
         loadReports();
+        loadChart();
     }
 }
+
+// ========================
+// EDIT RECORD
+// ========================
+
 function editRecord(index) {
 
     const record = records[index];
@@ -170,4 +170,65 @@ function editRecord(index) {
 
     loadDashboard();
     loadReports();
+    loadChart();
+}
+
+// ========================
+// RESET ALL DATA
+// ========================
+
+function resetData() {
+
+    const confirmReset = confirm("Are you sure you want to delete all records?");
+
+    if (confirmReset) {
+        localStorage.removeItem("records");
+        records = [];
+        loadDashboard();
+        loadReports();
+        loadChart();
+    }
+}
+
+// ========================
+// CHART.JS
+// ========================
+
+function loadChart() {
+
+    const canvas = document.getElementById("financeChart");
+    if (!canvas || typeof Chart === "undefined") return;
+
+    let income = 0;
+    let expense = 0;
+
+    records.forEach(record => {
+        if (record.type === "income") {
+            income += record.amount;
+        } else {
+            expense += record.amount;
+        }
+    });
+
+    // Destroy previous chart if exists
+    if (window.financeChartInstance) {
+        window.financeChartInstance.destroy();
+    }
+
+    window.financeChartInstance = new Chart(canvas, {
+        type: 'bar',
+        data: {
+            labels: ['Income', 'Expense'],
+            datasets: [{
+                data: [income, expense],
+                backgroundColor: ['green', 'red']
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false }
+            }
+        }
+    });
 }
