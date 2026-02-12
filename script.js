@@ -232,3 +232,34 @@ function loadChart() {
         }
     });
 }
+function calculateSavings() {
+
+    const incomeInput = document.getElementById("income");
+    const expenseInput = document.getElementById("expense");
+    const targetInput = document.getElementById("targetSavings");
+
+    if (!incomeInput || !expenseInput || !targetInput) return;
+
+    const income = Number(incomeInput.value);
+    const expense = Number(expenseInput.value);
+    const target = Number(targetInput.value);
+
+    if (!income || !expense || !target) {
+        alert("Please fill all fields.");
+        return;
+    }
+
+    const currentSavings = income - expense;
+
+    document.getElementById("currentSavings").textContent =
+        "Current Savings: ₹ " + currentSavings;
+
+    if (currentSavings >= target) {
+        document.getElementById("suggestion").textContent =
+            "Great! You are meeting your savings goal.";
+    } else {
+        const required = target - currentSavings;
+        document.getElementById("suggestion").textContent =
+            "You need to reduce expenses by ₹ " + required + " to reach your target.";
+    }
+}
