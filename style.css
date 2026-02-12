@@ -185,3 +185,12 @@ table td {
     color: red;
     font-weight: bold;
 }
+.reset-btn {
+    background-color: #dc2626;
+    margin-bottom: 15px;
+}
+
+.reset-btn:hover {
+    background-color: #b91c1c;
+}
+
