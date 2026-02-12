@@ -93,3 +93,14 @@ function loadReports() {
         });
     }
 }
+function resetData() {
+
+    const confirmReset = confirm("Are you sure you want to delete all records? This action cannot be undone.");
+
+    if (confirmReset) {
+        localStorage.removeItem("records");
+        records = [];
+        location.reload();
+    }
+
+}
