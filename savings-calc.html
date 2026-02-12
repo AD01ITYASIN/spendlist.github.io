@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Savings Calc - SpendList</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="navbar">
+    <h2>SpendList</h2>
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="add-expense.html">Add Expense</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="reports.html">Reports</a></li>
+        <li><a href="savings-calc.html">Savings Calc</a></li>
+        <li><a href="about.html">About</a></li>
+    </ul>
+</div>
+
+<div class="container">
+
+    <div class="card">
+        <h2>Savings Calculator</h2>
+
+        <input type="number" id="income" placeholder="Monthly Income">
+        <input type="number" id="expense" placeholder="Monthly Expense">
+        <input type="number" id="targetSavings" placeholder="Desired Savings">
+
+        <button onclick="calculateSavings()">Calculate</button>
+    </div>
+
+    <div class="card">
+        <h3>Result</h3>
+        <p id="currentSavings">Current Savings: ₹ 0</p>
+        <p id="suggestion"></p>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

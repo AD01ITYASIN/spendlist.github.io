@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SpendList - Home</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="navbar">
+    <h2>SpendList</h2>
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="add-expense.html">Add Expense</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="reports.html">Reports</a></li>
+        <li><a href="savings-calc.html">Savings Calc</a></li>
+        <li><a href="about.html">About</a></li>
+    </ul>
+</div>
+
+<div class="container">
+
+    <!-- Hero Section -->
+    <div class="card" style="text-align:center;">
+        <h1>Welcome to SpendList</h1>
+        <p style="font-size:18px; margin-top:10px;">
+            A Smart Personal Expense Tracker & Financial Planner
+        </p>
+        <p>
+            Track daily expenses, analyze monthly spending, and calculate your savings goals —
+            all in one simple dashboard.
+        </p>
+
+        <div style="margin-top:20px;">
+            <a href="add-expense.html">
+                <button>Start Tracking</button>
+            </a>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="card">
+        <h2>Why Use SpendList?</h2>
+
+        <div class="cards">
+
+            <div class="summary-card">
+                <h3>📅 Daily Tracking</h3>
+                <p>Record and manage your daily expenses easily.</p>
+            </div>
+
+            <div class="summary-card">
+                <h3>📊 Monthly Analysis</h3>
+                <p>View monthly totals and highest spending categories.</p>
+            </div>
+
+            <div class="summary-card">
+                <h3>💰 Savings Planner</h3>
+                <p>Calculate how much you need to save to reach your goals.</p>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<!-- Feedback Section -->
+<div class="feedback-section">
+    <div class="feedback-content">
+        <h2>Help Us Improve SpendList</h2>
+        <p>
+            Your feedback matters. Share your suggestions to help us enhance
+            the user experience and add better features.
+        </p>
+
+        <div class="feedback-form">
+            <input type="text" placeholder="Your Name">
+            <input type="email" placeholder="Your Email">
+            <textarea placeholder="Write your suggestion here..." rows="4"></textarea>
+            <button onclick="submitFeedback()">Submit Suggestion</button>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

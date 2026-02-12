@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Expense - SpendList</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="navbar">
+    <h2>SpendList</h2>
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="add-expense.html">Add Expense</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="reports.html">Reports</a></li>
+        <li><a href="savings-calc.html">Savings Calc</a></li>
+        <li><a href="about.html">About</a></li>
+    </ul>
+</div>
+
+<div class="container">
+    <div class="card">
+        <h2>Add New Expense</h2>
+
+       <form id="expenseForm">
+
+    <select id="type" required>
+        <option value="">Select Type</option>
+        <option value="income">Income</option>
+        <option value="expense">Expense</option>
+    </select>
+
+    <input type="number" id="amount" placeholder="Amount" required>
+
+    <select id="category" required>
+        <option value="">Select Category</option>
+        <option>Salary</option>
+        <option>Food</option>
+        <option>Travel</option>
+        <option>Shopping</option>
+        <option>Bills</option>
+        <option>Other</option>
+    </select>
+
+    <input type="date" id="date" required>
+
+    <input type="text" id="description" placeholder="Description" required>
+
+    <button type="submit">Add Record</button>
+
+</form>
+
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

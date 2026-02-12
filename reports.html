@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Reports - SpendList</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="navbar">
+    <h2>SpendList</h2>
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="add-expense.html">Add Expense</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="reports.html">Reports</a></li>
+        <li><a href="savings-calc.html">Savings Calc</a></li>
+        <li><a href="about.html">About</a></li>
+    </ul>
+</div>
+
+<div class="container">
+    <div class="card">
+        <h2>Expense Records</h2>
+
+        <table>
+            <thead>
+    <tr>
+        <th>Type</th>
+        <th>Amount</th>
+        <th>Category</th>
+        <th>Date</th>
+        <th>Description</th>
+    </tr>
+</thead>
+            <tbody id="expenseTable">
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
