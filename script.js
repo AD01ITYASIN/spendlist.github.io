@@ -1,4 +1,81 @@
 // ========================
+// AUTH FUNCTIONS
+// ========================
+
+function registerUser() {
+    const name = document.getElementById("regName").value.trim();
+    const email = document.getElementById("regEmail").value.trim();
+    const password = document.getElementById("regPassword").value.trim();
+
+    if (!name || !email || !password) {
+        alert("Please fill all fields.");
+        return;
+    }
+
+    const user = { name, email, password };
+    localStorage.setItem("spendlistUser", JSON.stringify(user));
+    alert("Account created! Please login.");
+    toggleForms();
+}
+
+function loginUser() {
+    const email = document.getElementById("loginEmail").value.trim();
+    const password = document.getElementById("loginPassword").value.trim();
+
+    const saved = JSON.parse(localStorage.getItem("spendlistUser"));
+
+    if (!saved || saved.email !== email || saved.password !== password) {
+        document.getElementById("loginError").style.display = "block";
+        return;
+    }
+
+    localStorage.setItem("loggedIn", "true");
+    window.location.href = "index.html";
+}
+
+function toggleForms() {
+    const login = document.getElementById("loginSection");
+    const register = document.getElementById("registerSection");
+    if (!login || !register) return;
+
+    if (login.style.display === "none") {
+        login.style.display = "block";
+        register.style.display = "none";
+    } else {
+        login.style.display = "none";
+        register.style.display = "block";
+    }
+}
+
+function signOut() {
+    localStorage.removeItem("loggedIn");
+    window.location.href = "login.html";
+}
+
+function checkAuth() {
+    const loggedIn = localStorage.getItem("loggedIn");
+    const isAuthPage = window.location.pathname.includes("login.html");
+
+    if (!loggedIn && !isAuthPage) {
+        window.location.href = "login.html";
+    }
+}
+
+// ========================
+// WELCOME MESSAGE
+// ========================
+
+function loadWelcome() {
+    const msg = document.getElementById("welcomeMsg");
+    if (!msg) return;
+
+    const user = JSON.parse(localStorage.getItem("spendlistUser"));
+    if (user) {
+        msg.textContent = "Hey, " + user.name + "! 👋";
+    }
+}
+
+// ========================
 // GLOBAL STORAGE
 // ========================
 
@@ -9,6 +86,9 @@ let records = JSON.parse(localStorage.getItem("records")) || [];
 // ========================
 
 document.addEventListener("DOMContentLoaded", function () {
+
+    checkAuth();
+    loadWelcome();
 
     const form = document.getElementById("expenseForm");
 
@@ -232,6 +312,11 @@ function loadChart() {
         }
     });
 }
+
+// ========================
+// SAVINGS CALCULATOR
+// ========================
+
 function calculateSavings() {
 
     const incomeInput = document.getElementById("income");
@@ -256,10 +341,18 @@ function calculateSavings() {
 
     if (currentSavings >= target) {
         document.getElementById("suggestion").textContent =
-            "Great! You are meeting your savings goal.";
+            "Great! You are meeting your savings goal. 🎉";
     } else {
         const required = target - currentSavings;
         document.getElementById("suggestion").textContent =
             "You need to reduce expenses by ₹ " + required + " to reach your target.";
     }
+}
+
+// ========================
+// FEEDBACK
+// ========================
+
+function submitFeedback() {
+    alert("Thank you for your feedback!");
 }
