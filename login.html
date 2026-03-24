@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SpendList - Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="auth-container">
+
+    <div class="auth-card" id="registerSection">
+        <h2>Create Account</h2>
+        <p style="margin-bottom:15px; color:#666;">Register to start tracking your expenses</p>
+
+        <input type="text" id="regName" placeholder="Your Name" required>
+        <input type="email" id="regEmail" placeholder="Your Email" required>
+        <input type="password" id="regPassword" placeholder="Create Password" required>
+
+        <button onclick="registerUser()">Register</button>
+
+        <p style="margin-top:15px; text-align:center;">
+            Already have an account?
+            <a href="#" onclick="toggleForms()">Login here</a>
+        </p>
+    </div>
+
+    <div class="auth-card" id="loginSection" style="display:none;">
+        <h2>Welcome Back</h2>
+        <p style="margin-bottom:15px; color:#666;">Login to continue to SpendList</p>
+
+        <input type="email" id="loginEmail" placeholder="Your Email" required>
+        <input type="password" id="loginPassword" placeholder="Your Password" required>
+
+        <p id="loginError" style="color:red; display:none; margin-bottom:10px;">
+            ❌ Wrong email or password. Try again.
+        </p>
+
+        <button onclick="loginUser()">Login</button>
+
+        <p style="margin-top:15px; text-align:center;">
+            Don't have an account?
+            <a href="#" onclick="toggleForms()">Register here</a>
+        </p>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
