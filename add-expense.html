@@ -21,36 +21,29 @@
 
 <div class="container">
     <div class="card">
-        <h2>Add New Expense</h2>
+        <h2>Add New Transaction</h2>
 
-       <form id="expenseForm">
+        <form id="expenseForm">
 
-    <select id="type" required>
-        <option value="">Select Type</option>
-        <option value="income">Income</option>
-        <option value="expense">Expense</option>
-    </select>
+            <select id="type" required onchange="updateCategories()">
+                <option value="">Select Type</option>
+                <option value="income">Income</option>
+                <option value="expense">Expense</option>
+            </select>
 
-    <input type="number" id="amount" placeholder="Amount" required>
+            <input type="number" id="amount" placeholder="Amount" required>
 
-    <select id="category" required>
-        <option value="">Select Category</option>
-        <option>Salary</option>
-        <option>Food</option>
-        <option>Travel</option>
-        <option>Shopping</option>
-        <option>Bills</option>
-        <option>Other</option>
-    </select>
+            <select id="category" required>
+                <option value="">Select Type First</option>
+            </select>
 
-    <input type="date" id="date" required>
+            <input type="date" id="date" required>
 
-    <input type="text" id="description" placeholder="Description" required>
+            <input type="text" id="description" placeholder="Description" required>
 
-    <button type="submit">Add Record</button>
+            <button type="submit">Add Record</button>
 
-</form>
-
+        </form>
     </div>
 </div>
 
