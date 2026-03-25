@@ -356,3 +356,52 @@ function calculateSavings() {
 function submitFeedback() {
     alert("Thank you for your feedback!");
 }
+function updateCategories() {
+    const type = document.getElementById("type").value;
+    const category = document.getElementById("category");
+
+    category.innerHTML = "";
+
+    if (type === "income") {
+        const incomeOptions = [
+            "Select Category",
+            "Salary",
+            "Business",
+            "Freelance",
+            "Investment",
+            "Rental Income",
+            "Other"
+        ];
+        incomeOptions.forEach((opt, i) => {
+            const option = document.createElement("option");
+            option.value = i === 0 ? "" : opt;
+            option.textContent = opt;
+            category.appendChild(option);
+        });
+
+    } else if (type === "expense") {
+        const expenseOptions = [
+            "Select Category",
+            "Food",
+            "Travel",
+            "Shopping",
+            "Bills",
+            "Entertainment",
+            "Healthcare",
+            "Education",
+            "Other"
+        ];
+        expenseOptions.forEach((opt, i) => {
+            const option = document.createElement("option");
+            option.value = i === 0 ? "" : opt;
+            option.textContent = opt;
+            category.appendChild(option);
+        });
+
+    } else {
+        const option = document.createElement("option");
+        option.value = "";
+        option.textContent = "Select Type First";
+        category.appendChild(option);
+    }
+}
