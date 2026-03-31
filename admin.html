@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel - SpendList</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="auth-container" id="adminGate">
+    <div class="auth-card">
+        <h2>🔐 Admin Access</h2>
+        <p style="margin-bottom:15px; color:#666;">Enter admin password to continue</p>
+        <input type="password" id="adminPassword" placeholder="Admin Password">
+        <p id="adminError" style="color:red; display:none; margin-bottom:10px;">
+            ❌ Wrong password. Access denied.
+        </p>
+        <button onclick="checkAdminPassword()">Enter</button>
+    </div>
+</div>
+
+<div id="adminPanel" style="display:none;">
+
+    <div class="navbar">
+        <h2>SpendList — Admin</h2>
+        <ul>
+            <li><a href="index.html">Back to App</a></li>
+        </ul>
+    </div>
+
+    <div class="container">
+
+        <div class="card">
+            <h2>📊 Registered Users</h2>
+            <p id="userCount" style="margin-bottom:15px; font-size:16px; color:#666;"></p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Registered On</th>
+                    </tr>
+                </thead>
+                <tbody id="usersTable">
+                </tbody>
+            </table>
+        </div>
+
+        <div class="cards" style="margin-top:20px;">
+            <div class="summary-card">
+                <h3>Total Users</h3>
+                <p id="adminTotalUsers">0</p>
+            </div>
+            <div class="summary-card">
+                <h3>Latest Signup</h3>
+                <p id="adminLatestUser" style="font-size:14px;">—</p>
+            </div>
+            <div class="summary-card">
+                <h3>Total Records</h3>
+                <p id="adminTotalRecords">0</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
